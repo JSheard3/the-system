@@ -36,6 +36,8 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
+body.resting{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 150px)}
 html,body{background:var(--void);color:var(--ink)}
 body{font-family:var(--f-body);font-size:15px;line-height:1.45;padding-inline:max(16px,env(safe-area-inset-left));padding-block:calc(env(safe-area-inset-top,0px) + 14px) calc(env(safe-area-inset-bottom,0px) + 96px);-webkit-tap-highlight-color:transparent;margin:0;
   background:radial-gradient(120% 60% at 50% -10%,#0b2a4d 0%,rgba(5,7,13,0) 60%),var(--void);min-height:100%}
@@ -165,10 +167,53 @@ button{font:inherit}
 .shop-item small{display:block;color:var(--gold);font-size:12px}
 .btn:disabled{opacity:.4;cursor:not-allowed}
 
+/* train */
+.wk-pick{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.wk-pick button{flex:1;min-width:64px}
+.wk-pick button[aria-pressed=true]{background:var(--glow);color:var(--void);font-weight:700}
+.ex{border-top:1px solid rgba(31,74,122,.5);padding:12px 0 6px}
+.ex:first-of-type{border-top:none}
+.ex.ss-a{padding-bottom:4px}
+.ex.ss-b{border-top:1px dashed var(--line);padding-top:8px}
+.ss-tag{font-family:var(--f-display);font-size:10px;letter-spacing:.14em;color:var(--violet);text-transform:uppercase}
+.ex-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.ex-h b{font-weight:600}
+.ex-h .mono{font-size:12px;color:var(--mute);white-space:nowrap}
+.ex .cue{display:block;color:var(--mute);font-size:12px}
+.ex .tgt{font-size:12px;color:var(--glow);margin-top:2px}
+.ex .tgt.up{color:var(--gold)}
+.ex .tgt.down{color:var(--red)}
+.warm{font-family:var(--f-mono);font-size:12px;color:var(--mute);margin-top:4px}
+.sets{display:grid;gap:6px;margin-top:8px}
+.set{display:grid;grid-template-columns:22px 1fr 14px 1fr 40px;gap:8px;align-items:center}
+.set .n{font-family:var(--f-mono);font-size:12px;color:var(--mute);text-align:center}
+.set .x{color:var(--mute);text-align:center;font-size:12px}
+.set input{padding:8px;font-family:var(--f-mono);font-size:15px;text-align:center}
+.set .chk{width:40px;height:38px;border:1.5px solid var(--glow);border-radius:3px;background:transparent;color:var(--void);cursor:pointer;display:grid;place-items:center}
+.set .chk::after{content:"";width:7px;height:13px;border:solid transparent;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.set.done .chk{background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.set.done .chk::after{border-color:var(--void)}
+.set.done input{color:var(--mute);border-color:transparent}
+.mob-item{display:flex;gap:12px;align-items:center;padding:8px 2px;border-bottom:1px solid rgba(31,74,122,.5);cursor:pointer}
+.mob-item:last-child{border-bottom:none}
+.mob-item input{position:absolute;opacity:0;pointer-events:none}
+.mob-item input:checked + .box{background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.mob-item input:checked + .box::after{content:"";width:6px;height:11px;border:solid var(--void);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.mob-item input:focus-visible + .box{outline:2px solid var(--gold);outline-offset:2px}
+.mob-item small{display:block;color:var(--mute);font-size:12px}
+.inline{display:flex;gap:8px;align-items:center;margin-top:8px}
+.inline input{max-width:110px}
+.restbar{display:flex;align-items:center;gap:10px;max-width:560px;margin:0 auto;padding:8px 12px;border-bottom:1px solid var(--line);font-family:var(--f-display);letter-spacing:.08em;text-transform:uppercase;font-size:12px}
+.restbar .t{font-family:var(--f-mono);font-size:22px;color:var(--glow);text-shadow:0 0 10px var(--glow);letter-spacing:0;min-width:64px}
+.restbar .nx{flex:1;min-width:0;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.restbar.go .t{color:var(--green);text-shadow:0 0 12px var(--green)}
+@keyframes flash{0%,100%{background:rgba(5,7,13,.94)}50%{background:rgba(77,255,176,.35)}}
+nav.tabs.flash{animation:flash .5s ease-in-out 4}
+
 /* tabs */
 nav.tabs{position:fixed;left:0;right:0;bottom:0;padding-bottom:env(safe-area-inset-bottom,0px);background:rgba(5,7,13,.94);border-top:1px solid var(--line);backdrop-filter:blur(8px);z-index:5}
-nav.tabs .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
-nav.tabs button{background:none;border:none;color:var(--mute);padding:12px 2px 12px;font-family:var(--f-display);letter-spacing:.1em;font-size:12px;text-transform:uppercase;cursor:pointer;position:relative}
+nav.tabs .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr)}
+nav.tabs button{background:none;border:none;color:var(--mute);padding:12px 0 12px;font-family:var(--f-display);letter-spacing:.06em;font-size:11px;text-transform:uppercase;cursor:pointer;position:relative}
 nav.tabs button[aria-selected=true]{color:var(--glow);text-shadow:0 0 10px var(--glow)}
 nav.tabs button[aria-selected=true]::before{content:"";position:absolute;top:-1px;left:22%;right:22%;height:2px;background:var(--glow);box-shadow:0 0 10px var(--glow)}
 nav.tabs button:focus-visible{outline:2px solid var(--gold);outline-offset:-4px}
@@ -186,7 +231,7 @@ nav.tabs button:focus-visible{outline:2px solid var(--gold);outline-offset:-4px}
 .login .err{color:var(--red);font-size:13px;text-align:center;min-height:1em}
 body.locked nav.tabs,body.locked #app{display:none}
 body:not(.locked) #login{display:none}
-@media (prefers-reduced-motion:reduce){.view:not([hidden]){animation:none}.bar > i{transition:none}}
+@media (prefers-reduced-motion:reduce){nav.tabs.flash{animation:none;background:rgba(77,255,176,.25)}.view:not([hidden]){animation:none}.bar > i{transition:none}}
 </style>
 </head>
 <body class="locked">
@@ -274,6 +319,28 @@ body:not(.locked) #login{display:none}
     </div>
   </section>
 
+  <!-- TRAIN -->
+  <section class="view" id="v-train" aria-label="Train" hidden>
+    <div class="wrap">
+      <div class="win">
+        <div class="win-title"><span class="bang">!</span>Dungeon</div>
+        <div id="train"></div>
+      </div>
+      <div class="win">
+        <div class="win-title" id="mob-title">Daily mobility</div>
+        <div id="mobility"></div>
+      </div>
+      <div class="win">
+        <div class="win-title">Zone 2 cardio</div>
+        <div id="zone2"></div>
+      </div>
+      <div class="win">
+        <div class="win-title">Waist</div>
+        <div id="waist"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- GATES -->
   <section class="view" id="v-gates" aria-label="Gates and main quests" hidden>
     <div class="wrap">
@@ -344,9 +411,12 @@ body:not(.locked) #login{display:none}
   <p class="status-line"><button class="btn tiny" id="signout" type="button">Sign out</button></p>
 </div>
 
-<nav class="tabs" aria-label="Sections"><div class="in" role="tablist">
+<nav class="tabs" aria-label="Sections">
+<div class="restbar" id="restbar" role="timer" aria-live="polite" hidden><span class="t" id="rest-t">0:00</span><span class="nx" id="rest-nx"></span><button class="btn tiny" id="rest-add" type="button">+30s</button><button class="btn tiny" id="rest-skip" type="button">Skip</button></div>
+<div class="in" role="tablist">
   <button role="tab" id="t-status" aria-selected="true" data-v="status">Status</button>
   <button role="tab" id="t-quests" aria-selected="false" data-v="quests">Quests</button>
+  <button role="tab" id="t-train" aria-selected="false" data-v="train">Train</button>
   <button role="tab" id="t-gates" aria-selected="false" data-v="gates">Gates</button>
   <button role="tab" id="t-shop" aria-selected="false" data-v="shop">Shop</button>
   <button role="tab" id="t-log" aria-selected="false" data-v="log">Log</button>
@@ -374,6 +444,7 @@ body:not(.locked) #login{display:none}
   const sunday = () => (config?.sunday?.length ? config.sunday : SUNDAY_DEFAULT);
   const ALL_BONUS = 50;
   const GOLD_PER_XP = 0.25;
+  const TRAIN_XP = {workout:30, mob:10, z2:15};
   const PROTEIN_GOAL = () => config?.player?.proteinGoal || 190;
   const SURPRISES = [
     {name:"100 push-ups, any sets",            hint:"The original daily quest",            stat:"STR", xp:30},
@@ -496,6 +567,9 @@ body:not(.locked) #login{display:none}
     for (const q of qs) if (d.q && d.q[q.id]) { xp += q.xp; n++; }
     const dailyDone = daily().every(q => d.q && d.q[q.id]);
     if (dailyDone) xp += ALL_BONUS;
+    if (d.workout?.done) xp += TRAIN_XP.workout;
+    if (d.mob?.done) xp += TRAIN_XP.mob;
+    if (d.z2 > 0) xp += TRAIN_XP.z2;
     return xp;
   }
   function totals(){
@@ -503,6 +577,9 @@ body:not(.locked) #login{display:none}
     for (const k of Object.keys(days)){
       xp += dayXp(k);
       for (const q of allQuestsFor(k)) if (days[k].q && days[k].q[q.id]) { pts[q.stat]++; cleared++; }
+      if (days[k].workout?.done) pts.STR++;
+      if (days[k].mob?.done) pts.AGI++;
+      if (days[k].z2 > 0) pts.VIT++;
     }
     for (const s in st) st[s] += Math.floor(pts[s]/2);
     // gates cleared give XP too
@@ -521,6 +598,7 @@ body:not(.locked) #login{display:none}
   // ---------- render ----------
   function render(){
     const k = today();
+    renderTrain();
     const {xp, st, cleared} = totals();
     const L = levelFromXp(xp), lo = xpForLevel(L), hi = xpForLevel(L+1);
     $("lvl").textContent = L;
@@ -626,6 +704,212 @@ body:not(.locked) #login{display:none}
       return `<div class="entry"><span class="tag">${esc(e.type)}</span><div class="grow">${esc(e.text||"")}<small>${esc(e.day)}${extra?" · "+esc(extra):""}</small></div>${amt!==null?`<span class="amt ${cls}">${money(amt)}</span>`:""}</div>`;
     }).join("") : `<div class="empty">Nothing recorded yet. Log a workout, bet, or DoorDash shift above.</div>`;
   }
+
+  // ---------- train ----------
+  // The plan lives in system/config.training: {rotation:[ids], workouts:{id:{name, focus, ex:[{id,name,sets,reps:[lo,hi],rest,inc,cue,warmup,bw,ss}]}},
+  // mobility:{name, items:[{id,name,dose}]}, zone2:{perWeek, minutes, what}}. Sessions save to days/<date>: workout {id, done, sets:{exId:[{w,r}]}}, mob, z2, waist.
+  const plan = () => config?.training || null;
+  const round5 = n => Math.round(n/5)*5;
+  const fmtW = (w, ex) => ex.bw ? (w ? `+${w}` : "BW") : `${w}`;
+  let trainPick = null;               // workout chosen today before any set is logged
+  const draft = {};                   // unsaved inputs: draft[exId][i] = {w, r}
+
+  function nextWorkoutId(k){
+    const p = plan(); if (!p) return null;
+    if (days[k]?.workout?.id) return days[k].workout.id;
+    if (trainPick && p.workouts[trainPick]) return trainPick;
+    const last = Object.keys(days).filter(x => x < k && days[x].workout?.id && (days[x].workout.done || Object.keys(days[x].workout.sets||{}).length)).sort().pop();
+    const rot = p.rotation;
+    if (!last) return rot[0];
+    const i = rot.indexOf(days[last].workout.id);
+    return rot[(i+1) % rot.length];
+  }
+  function history(exId, k, n){
+    const out = [];
+    for (const x of Object.keys(days).filter(x => x < k).sort().reverse()){
+      const sets = (days[x].workout?.sets?.[exId] || []).filter(s => s && s.w != null);
+      if (sets.length) { out.push({k:x, sets, w:sets[0].w, reps:sets.reduce((a,s)=>a+(s.r||0),0)}); if (out.length>=n) break; }
+    }
+    return out;
+  }
+  function targetFor(ex, k){
+    const [lo, hi] = ex.reps, inc = ex.inc ?? 5;
+    const h = history(ex.id, k, 3);
+    if (!h.length) return {w: ex.bw ? 0 : null, reps: Array(ex.sets).fill(lo), note: ex.bw ? `Start with bodyweight, aim for ${lo}-${hi} reps` : `Calibrate: pick a weight you can do ${lo} clean reps with`, cls:""};
+    const last = h[0], lastStr = `Last: ${fmtW(last.w, ex)} × ${last.sets.map(s=>s.r).join(", ")}`;
+    const allTop = last.sets.length >= ex.sets && last.sets.every(s => s.r >= hi);
+    if (allTop && inc > 0) return {w: last.w + inc, reps: Array(ex.sets).fill(lo), note: `⬆ Add ${inc} lb. You hit ${hi} on every set. ${lastStr}`, cls:"up"};
+    if (allTop) return {w: last.w, reps: Array(ex.sets).fill(hi), note: `Top of the range. Slow the lowering to 3 s or add a little load. ${lastStr}`, cls:"up"};
+    const stalled = h.length === 3 && h.every(x => x.w === last.w) && h[0].reps <= h[1].reps && h[1].reps <= h[2].reps && !ex.bw;
+    if (stalled) return {w: round5(last.w*0.9), reps: Array(ex.sets).fill(hi), note: `Stalled 3 sessions. Drop 10% and build back up. ${lastStr}`, cls:"down"};
+    return {w: last.w, reps: Array.from({length:ex.sets}, (_,i) => Math.min(hi, (last.sets[i]?.r ?? lo-1) + 1)), note: `Beat last time. ${lastStr}`, cls:""};
+  }
+  function warmups(ex, w){
+    if (!ex.warmup) return "";
+    if (!w) return `Warm-up: empty bar × 10, then 2-3 lighter sets up to your working weight`;
+    const steps = [[45,10],[round5(w*.5),5],[round5(w*.7),3],[round5(w*.85),1]].filter(([x],i) => i===0 || (x > 45 && x < w));
+    return "Warm-up: " + steps.map(([x,r]) => `${x}×${r}`).join(" · ");
+  }
+  function weekKeys(k){
+    const d = parseKey(k), dow = (d.getDay()+6)%7, out = [];
+    for (let i=0;i<7;i++){ const x = new Date(d); x.setDate(d.getDate()-dow+i); out.push(keyOf(x)); }
+    return out;
+  }
+
+  function renderTrain(){
+    const p = plan(), k = today(), d = days[k] || {};
+    if (!p){ $("train").innerHTML = `<div class="empty">No training plan yet. Claude adds yours here.</div>`; $("mobility").innerHTML = $("zone2").innerHTML = $("waist").innerHTML = ""; return; }
+    const tr = $("train");
+    if (!tr.contains(document.activeElement)){
+      const wid = nextWorkoutId(k), w = p.workouts[wid], wo = d.workout?.id === wid ? d.workout : null;
+      const locked = !!(wo && Object.keys(wo.sets||{}).length);
+      let html = `<div class="wk-pick" role="group" aria-label="Choose workout">${p.rotation.map(id => `<button class="btn tiny" type="button" data-pick="${esc(id)}" aria-pressed="${id===wid}" ${locked && id!==wid ? "disabled" : ""}>${esc(p.workouts[id].name)}</button>`).join("")}</div>`;
+      html += `<div class="banner"><div class="q">[ ${wo?.done ? "Dungeon cleared" : "Today's dungeon"} ]</div><div class="n">${esc(w.name)} · ${esc(w.focus||"")}</div></div>`;
+      w.ex.forEach((ex, j) => {
+        const t = targetFor(ex, k), done = wo?.sets?.[ex.id] || [], prevSS = j>0 && w.ex[j-1].ss;
+        const cls = ex.ss ? "ss-a" : prevSS ? "ss-b" : "";
+        html += `<div class="ex ${cls}">${ex.ss ? `<span class="ss-tag">Superset</span>` : ""}
+          <div class="ex-h"><b>${esc(ex.name)}</b><span class="mono">${ex.sets} × ${ex.reps[0]}-${ex.reps[1]} · ${ex.rest>=60?Math.round(ex.rest/60*10)/10+" min":ex.rest+" s"}</span></div>
+          ${ex.cue ? `<small class="cue">${esc(ex.cue)}</small>` : ""}
+          <div class="tgt ${t.cls}">${esc(t.note)}</div>
+          ${ex.warmup ? `<div class="warm">${esc(warmups(ex, t.w))}</div>` : ""}
+          <div class="sets">${Array.from({length:ex.sets}, (_,i) => {
+            const s = done[i], dr = draft[ex.id]?.[i] || {};
+            const wv = s ? s.w : (dr.w ?? t.w ?? ""), rv = s ? s.r : (dr.r ?? t.reps[i]);
+            return `<div class="set${s?" done":""}"><span class="n">${i+1}</span>
+              <input type="number" inputmode="decimal" step="2.5" value="${wv ?? ""}" placeholder="${ex.bw?"+lb":"lb"}" data-ex="${esc(ex.id)}" data-i="${i}" data-f="w" aria-label="${esc(ex.name)} set ${i+1} weight">
+              <span class="x">×</span>
+              <input type="number" inputmode="numeric" step="1" value="${rv ?? ""}" placeholder="reps" data-ex="${esc(ex.id)}" data-i="${i}" data-f="r" aria-label="${esc(ex.name)} set ${i+1} reps">
+              <button type="button" class="chk" data-set="${esc(ex.id)}" data-i="${i}" aria-pressed="${!!s}" aria-label="${s?"Undo":"Done"}: ${esc(ex.name)} set ${i+1}"></button></div>`;
+          }).join("")}</div></div>`;
+      });
+      html += wo?.done
+        ? `<div class="reward">Dungeon cleared · +${TRAIN_XP.workout} XP · Train quest cleared</div>`
+        : `<div class="row" style="justify-content:center;margin-top:14px"><button class="btn solid" type="button" id="finish">Clear the dungeon</button></div>`;
+      tr.innerHTML = html;
+    }
+
+    // mobility
+    const mob = p.mobility, md = d.mob || {items:{}};
+    if (mob){
+      $("mob-title").textContent = mob.name || "Daily mobility";
+      $("mobility").innerHTML = (mob.note ? `<div class="sub" style="margin-bottom:6px">${esc(mob.note)}</div>` : "") + mob.items.map(it => `<label class="mob-item" for="mob-${esc(it.id)}">
+          <input type="checkbox" id="mob-${esc(it.id)}" data-mob="${esc(it.id)}" ${md.items?.[it.id]?"checked":""}><span class="box" aria-hidden="true"></span>
+          <span class="grow"><b>${esc(it.name)}</b><small>${esc(it.dose)}</small></span></label>`).join("")
+        + (md.done ? `<div class="reward">Mobility done · +${TRAIN_XP.mob} XP · AGI up</div>` : "");
+    }
+    // zone 2
+    const z = p.zone2;
+    if (z){
+      const wk = weekKeys(k), n = wk.filter(x => days[x]?.z2 > 0).length;
+      $("zone2").innerHTML = `<div class="row between"><span class="sub">${esc(z.what||"")}</span><span class="mono">${n}/${z.perWeek} this week</span></div>
+        ${d.z2 > 0 ? `<div class="reward">Logged ${d.z2} min today · +${TRAIN_XP.z2} XP</div><div class="row" style="justify-content:center;margin-top:6px"><button class="btn tiny" type="button" id="z2-undo">Undo</button></div>`
+          : `<div class="inline"><input id="z2-min" type="number" inputmode="numeric" placeholder="${esc(String(z.minutes||25))}" aria-label="Zone 2 minutes"><span class="sub">min</span><button class="btn tiny solid" type="button" id="z2-log">Log Zone 2</button></div>`}`;
+    }
+    // waist
+    const ws = Object.keys(days).filter(x => typeof days[x].waist === "number").sort();
+    const lastW = ws.length ? days[ws[ws.length-1]] : null, firstW = ws.length > 1 ? days[ws[0]] : null;
+    const isSun = parseKey(k).getDay() === 0;
+    if (!$("waist").contains(document.activeElement)) $("waist").innerHTML = `<div class="sub">${isSun ? "Sunday check: measure at the navel, relaxed, first thing in the morning." : "Measure Sunday mornings at the navel."}</div>
+      <div class="row between" style="margin-top:6px"><span class="mono">${lastW ? `${lastW.waist}" on ${esc(ws[ws.length-1])}` : "No measurement yet"}</span><span class="mono sub">${firstW ? `${(lastW.waist-firstW.waist>0?"+":"")}${(lastW.waist-firstW.waist).toFixed(1)}" since ${esc(ws[0])}` : ""}</span></div>
+      <div class="inline"><input id="waist-in" type="number" inputmode="decimal" step="0.25" placeholder="${lastW?.waist ?? 36}" aria-label="Waist in inches"><span class="sub">in</span><button class="btn tiny${isSun?" solid":""}" type="button" id="waist-save">Save</button></div>`;
+  }
+
+  // rest timer: end time is kept in localStorage so a reload or a trip to another app doesn't lose it
+  let rest = LS.get("sys-rest", null), restTick = null, audio = null;
+  function unlockAudio(){ try { audio ||= new (window.AudioContext || window.webkitAudioContext)(); if (audio.state === "suspended") audio.resume(); } catch(_){} }
+  function beep(){
+    if (!audio) return;
+    try { [0, .25, .5].forEach(t => { const o = audio.createOscillator(), g = audio.createGain(); o.frequency.value = 880; o.connect(g); g.connect(audio.destination);
+      g.gain.setValueAtTime(.0001, audio.currentTime+t); g.gain.exponentialRampToValueAtTime(.4, audio.currentTime+t+.02); g.gain.exponentialRampToValueAtTime(.0001, audio.currentTime+t+.18);
+      o.start(audio.currentTime+t); o.stop(audio.currentTime+t+.2); }); } catch(_){}
+  }
+  function startRest(sec, label){ rest = {end: Date.now() + sec*1000, label, fired:false}; LS.set("sys-rest", rest); drawRest(); }
+  function drawRest(){
+    const bar = $("restbar"); clearTimeout(restTick);
+    if (!rest){ bar.hidden = true; document.body.classList.remove("resting"); return; }
+    document.body.classList.add("resting");
+    const left = Math.ceil((rest.end - Date.now())/1000);
+    bar.hidden = false;
+    if (left > 0){
+      bar.classList.remove("go");
+      $("rest-t").textContent = `${Math.floor(left/60)}:${pad(left%60)}`;
+      $("rest-nx").textContent = rest.label ? "Next: " + rest.label : "Rest";
+      restTick = setTimeout(drawRest, 250);
+    } else {
+      bar.classList.add("go"); $("rest-t").textContent = "GO"; $("rest-nx").textContent = rest.label || "";
+      if (!rest.fired){ rest.fired = true; LS.set("sys-rest", rest); beep(); const nav = document.querySelector("nav.tabs"); nav.classList.remove("flash"); void nav.offsetWidth; nav.classList.add("flash"); }
+      if (Date.now() - rest.end > 60000){ rest = null; LS.set("sys-rest", null); bar.hidden = true; document.body.classList.remove("resting"); return; }
+      restTick = setTimeout(drawRest, 1000);
+    }
+  }
+  $("rest-add").addEventListener("click", () => { if (!rest) return; rest.end = Math.max(rest.end, Date.now()) + 30000; rest.fired = false; LS.set("sys-rest", rest); drawRest(); });
+  $("rest-skip").addEventListener("click", () => { rest = null; LS.set("sys-rest", null); drawRest(); });
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") drawRest(); });
+
+  function nextLabel(w, j, i){
+    const ex = w.ex[j], prev = w.ex[j-1];
+    const at = (jj, ii) => w.ex[jj] && ii < w.ex[jj].sets ? `${w.ex[jj].name} · set ${ii+1}` : null;
+    if (ex.ss) return at(j+1, i) || at(j+2, 0) || "Clear the dungeon";
+    if (prev?.ss) return at(j-1, i+1) || at(j, i+1) || at(j+1, 0) || "Clear the dungeon";
+    return at(j, i+1) || at(j+1, 0) || "Clear the dungeon";
+  }
+  function finishWorkout(k){
+    const d = days[k] || {q:{}}; const wo = d.workout; if (!wo || wo.done) return;
+    saveDay(k, {workout: {...wo, done: true, finished: Date.now()}, q: Object.assign({}, d.q, {train: true})});
+    rest = null; LS.set("sys-rest", null); drawRest();
+    toast(`Dungeon cleared · <b>+${TRAIN_XP.workout} XP</b> · Train quest cleared`);
+  }
+  $("train").addEventListener("input", e => {
+    const el = e.target; if (!el.dataset.ex) return;
+    ((draft[el.dataset.ex] ||= [])[el.dataset.i] ||= {})[el.dataset.f] = el.value === "" ? null : Number(el.value);
+  });
+  $("train").addEventListener("click", e => {
+    const p = plan(), k = today();
+    const pk = e.target.closest("[data-pick]");
+    if (pk){ trainPick = pk.dataset.pick; renderTrain(); return; }
+    if (e.target.closest("#finish")){
+      const d = days[k] || {};
+      if (!d.workout) saveDay(k, {workout: {id: nextWorkoutId(k), started: Date.now(), sets: {}}});
+      finishWorkout(k); return;
+    }
+    const b = e.target.closest("[data-set]"); if (!b) return;
+    unlockAudio();
+    const wid = nextWorkoutId(k), w = p.workouts[wid], j = w.ex.findIndex(x => x.id === b.dataset.set), ex = w.ex[j], i = Number(b.dataset.i);
+    const d = days[k] || {}, wo = d.workout?.id === wid ? JSON.parse(JSON.stringify(d.workout)) : {id: wid, started: Date.now(), sets: {}};
+    const arr = wo.sets[ex.id] ||= [];
+    if (arr[i]) { arr[i] = null; while (arr.length && !arr[arr.length-1]) arr.pop(); if (!arr.length) delete wo.sets[ex.id]; saveDay(k, {workout: wo}); return; }
+    const row = b.closest(".set"), wv = row.querySelector('[data-f="w"]').value, rv = row.querySelector('[data-f="r"]').value;
+    if ((wv === "" && !ex.bw) || rv === "") { row.querySelector(wv === "" && !ex.bw ? '[data-f="w"]' : '[data-f="r"]').focus(); toast("Enter the weight and reps first"); return; }
+    arr[i] = {w: wv === "" ? 0 : Number(wv), r: Number(rv)};
+    if (draft[ex.id]) delete draft[ex.id][i];
+    saveDay(k, {workout: wo});
+    const total = w.ex.reduce((a,x) => a + x.sets, 0), doneN = Object.values(wo.sets).reduce((a,s) => a + s.filter(Boolean).length, 0);
+    if (doneN >= total) { finishWorkout(k); return; }
+    startRest(ex.rest || 90, nextLabel(w, j, i));
+  });
+  $("mobility").addEventListener("change", e => {
+    const id = e.target.dataset.mob; if (!id) return;
+    const k = today(), d = days[k] || {q:{}}, items = Object.assign({}, d.mob?.items, {[id]: e.target.checked});
+    const done = plan().mobility.items.every(it => items[it.id]);
+    saveDay(k, {mob: {items, done}});
+    if (done && !d.mob?.done) toast(`Mobility done · <b>+${TRAIN_XP.mob} XP</b> · AGI up`);
+  });
+  $("zone2").addEventListener("click", e => {
+    const k = today(), d = days[k] || {q:{}};
+    if (e.target.closest("#z2-log")){
+      const m = Number($("z2-min").value || plan().zone2.minutes || 25); if (!(m > 0)) return;
+      saveDay(k, {z2: m, q: Object.assign({}, d.q, {train: true})});
+      toast(`Zone 2 logged · <b>+${TRAIN_XP.z2} XP</b> · Train quest cleared`);
+    }
+    if (e.target.closest("#z2-undo")) saveDay(k, {z2: null});
+  });
+  $("waist").addEventListener("click", e => {
+    if (!e.target.closest("#waist-save")) return;
+    const v = Number($("waist-in").value); if (!(v > 20 && v < 70)) { $("waist-in").focus(); return; }
+    $("waist-in").blur(); saveDay(today(), {waist: v}); toast("Waist recorded");
+  });
+  drawRest();
 
   // ---------- clock ----------
   function tick(){
